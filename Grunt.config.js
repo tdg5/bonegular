@@ -5,7 +5,8 @@ module.exports = function(grunt) {
 
     return {
         'alias': {
-            'build': ['browserify']
+            'build': ['browserify'],
+            'serve': ['concurrent:serve']
         }
     };
 

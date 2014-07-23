@@ -1,5 +1,5 @@
 app = angular.module('myApp', [
-    'nexus'
+    'bonegular'
 ]);
 
 app.controller('DefaultController', function($scope, Countries) {
@@ -15,8 +15,8 @@ app.controller('DefaultController', function($scope, Countries) {
 /**
  * @service Country
  */
-app.factory('Country', function(nexus, States) {
-    return nexus.createModel({
+app.factory('Country', function(bonegular, States) {
+    return bonegular.createModel({
         'name': 'Country',
         'collections': {
             'states': 'States'
@@ -28,8 +28,8 @@ app.factory('Country', function(nexus, States) {
 /**
  * @service Countries
  */
-app.factory('Countries', function(nexus, Country) {
-    return nexus.createCollection({
+app.factory('Countries', function(bonegular, Country) {
+    return bonegular.createCollection({
         'name': 'Countries',
         'model': 'Country',
         'rootUrl': '/countries',
@@ -37,8 +37,8 @@ app.factory('Countries', function(nexus, Country) {
     });
 });
 
-app.factory('State', function(nexus) {
-    return nexus.createModel({
+app.factory('State', function(bonegular) {
+    return bonegular.createModel({
         'name': 'State',
         'methods': {
             'describe': function() {
@@ -48,8 +48,8 @@ app.factory('State', function(nexus) {
     });
 });
 
-app.factory('States', function(nexus, State) {
-    return nexus.createCollection({
+app.factory('States', function(bonegular, State) {
+    return bonegular.createCollection({
         'name': 'States',
         'model': 'State',
         'url': 'states',

@@ -1,8 +1,8 @@
 'use strict';
 
-var nexus = angular.module('nexus', []);
+var bonegular = angular.module('bonegular', []);
 
-nexus.factory('nexus', function($http, $q) {
+bonegular.factory('bonegular', function($http, $q) {
 
     var data = {
         'models': {},

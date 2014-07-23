@@ -2,7 +2,7 @@ module.exports = function(grunt) {
 
     var port = 7000;
 
-    grunt.registerTask('serve', function() {
+    grunt.registerTask('server', function() {
 
         var done = this.async();
 

@@ -1,6 +1,6 @@
 {
-  "name": "angular-nexus",
-  "version": "0.0.1",
+  "name": "bonegular",
+  "version": "0.0.2",
   "dependencies": {
     "angular": "~1.2.20",
     "underscore": "~1.6.0"
