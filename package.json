@@ -1,0 +1,32 @@
+{
+  "name": "angular-nexus",
+  "version": "0.0.0",
+  "devDependencies": {
+    "glob": "~4.0.3",
+    "load-grunt-tasks": "~0.6.0",
+    "grunt": "~0.4.5",
+    "time-grunt": "~0.3.2",
+    "grunt-compass": "~0.3.9",
+    "grunt-express-server": "~0.4.17",
+    "grunt-contrib-watch": "~0.6.1",
+    "express": "~4.6.1",
+    "browserify": "~4.2.1",
+    "brfs": "~1.1.2",
+    "bulkify": "~1.0.2",
+    "aliasify": "~1.4.0",
+    "folderify": "~0.6.0",
+    "time-grunt": "*",
+    "underscore": "~1.6.0",
+    "wrench": "~1.5.8",
+    "cheerio": "~0.17.0",
+    "grunt-open": "~0.2.3",
+    "grunt-concurrent": "~0.5.0",
+    "underscore.string": "~2.3.3",
+    "grunt-contrib-compress": "~0.10.0",
+    "grunt-contrib-uglify": "~0.5.0",
+    "uglify-js": "~2.4.15",
+    "clean-css": "~2.2.7",
+    "grunt-contrib-jshint": "~0.10.0",
+    "grunt-browserify": "~2.1.3"
+  }
+}
