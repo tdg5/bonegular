@@ -1,5 +1,8 @@
 # Bonegular
 
+<img style="float: right; width: 125px; margin-left: 20px;" src="https://dl.dropboxusercontent.com/u/832215/bonegular.png" />
+
+
 [AngularJS](https://angularjs.org) is a fantastic client-side framework. It solves a lot of problems, but provides little to no guidance in terms of how one might best go about structuring the underlying data of an application. I tried [$resource](https://docs.angularjs.org/api/ngResource/service/$resource) and [Restangular](https://github.com/mgonto/restangular), but they weren't really "doing it for me." I found myself longing for something more akin to the Collection and Model classes that you find in [Backbone](http://backbonejs.org). Click, click. Tap, tap. Voila... Bonegular. Makes perfect sense.
 
 This is an alpha release. The API could change a little, but I'm already using this in production and it works great.
@@ -18,8 +21,8 @@ This is an alpha release. The API could change a little, but I'm already using t
 /**
  * @service Country
  */
-app.factory('Country', function(nexus, States) {
-    return nexus.createModel({
+app.factory('Country', function(bonegular, States) {
+    return bonegular.createModel({
         'name': 'Country',
         'collections': {
             'states': 'States'
@@ -31,8 +34,8 @@ app.factory('Country', function(nexus, States) {
 /**
  * @service Countries
  */
-app.factory('Countries', function(nexus, Country) {
-    return nexus.createCollection({
+app.factory('Countries', function(bonegular, Country) {
+    return bonegular.createCollection({
         'name': 'Countries',
         'model': 'Country',
         'rootUrl': '/countries',
@@ -40,8 +43,8 @@ app.factory('Countries', function(nexus, Country) {
     });
 });
 
-app.factory('State', function(nexus) {
-    return nexus.createModel({
+app.factory('State', function(bonegular) {
+    return bonegular.createModel({
         'name': 'State',
         'methods': {
             'describe': function() {
@@ -51,8 +54,8 @@ app.factory('State', function(nexus) {
     });
 });
 
-app.factory('States', function(nexus, State) {
-    return nexus.createCollection({
+app.factory('States', function(bonegular, State) {
+    return bonegular.createCollection({
         'name': 'States',
         'model': 'State',
         'url': 'states',
