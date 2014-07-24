@@ -94,7 +94,7 @@ app.factory('Schools', function(bonegular) {
 ```
 app.factory('Schools', function(bonegular) {
 	return bonegular.createCollection({
-		'url': 'schools',
+		'url': 'students',
 		'methods': {}
 	});
 });
