@@ -1,6 +1,6 @@
 'use strict';
 
-module.exports = function(data, $http, $q) {
+module.exports = function($http, $q) {
 
     var util = require('./util')($http, $q);
 
@@ -41,8 +41,7 @@ module.exports = function(data, $http, $q) {
         'createCollections': function(properties) {
             _.each(this._collections, function(collection, name) {
                 if (!this[name]) {
-                    var Collection = data.collections[collection];
-                    this[name] = new Collection(properties[name] || null, this);
+                    this[name] = new collection(properties[name] || null, this);
                 } else {
                     this[name].replaceAll(properties[name]);
                 }

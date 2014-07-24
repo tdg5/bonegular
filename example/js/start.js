@@ -19,7 +19,7 @@ app.factory('Country', function(bonegular, States) {
     return bonegular.createModel({
         'name': 'Country',
         'collections': {
-            'states': 'States'
+            'states': States
         },
         'methods': {}
     });
@@ -31,7 +31,7 @@ app.factory('Country', function(bonegular, States) {
 app.factory('Countries', function(bonegular, Country) {
     return bonegular.createCollection({
         'name': 'Countries',
-        'model': 'Country',
+        'model': Country,
         'rootUrl': '/countries',
         'methods': {}
     });
@@ -51,7 +51,7 @@ app.factory('State', function(bonegular) {
 app.factory('States', function(bonegular, State) {
     return bonegular.createCollection({
         'name': 'States',
-        'model': 'State',
+        'model': State,
         'url': 'states',
         'methods': {}
     });

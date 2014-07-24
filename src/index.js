@@ -4,13 +4,10 @@ var bonegular = angular.module('bonegular', []);
 
 bonegular.factory('bonegular', function($http, $q) {
 
-    var data = {
-        'models': {},
-        'collections': {}
-    }, BaseModel, BaseCollection, createModel, createCollection;
+    var BaseModel, BaseCollection, createModel, createCollection;
 
-    BaseModel = require('./lib/model')(data, $http, $q);
-    BaseCollection = require('./lib/collection')(data, $http, $q);
+    BaseModel = require('./lib/model')($http, $q);
+    BaseCollection = require('./lib/collection')($http, $q);
 
     /**
      * Defines a new Model
@@ -83,8 +80,6 @@ bonegular.factory('bonegular', function($http, $q) {
             });
         });
 
-        data.models[options.name] = Model;
-
         return Model;
 
     };
@@ -135,7 +130,7 @@ bonegular.factory('bonegular', function($http, $q) {
                 'configurable': false,
                 'writable': false,
                 'enumerable': false,
-                'value': data.models[options.model]
+                'value': options.model
             });
 
             Object.defineProperty(this, '_url', {
@@ -186,8 +181,6 @@ bonegular.factory('bonegular', function($http, $q) {
             return collection.create.apply(collection, arguments);
         };
 
-        data.collections[options.name] = Collection;
-
         return Collection;
 
     };
@@ -200,14 +193,6 @@ bonegular.factory('bonegular', function($http, $q) {
 
         'createCollection': function(options) {
             return createCollection(options);
-        },
-
-        'getModel': function(name) {
-            return data.models[name];
-        },
-
-        'getCollection': function(name) {
-            return data.collections[name];
         }
 
     };

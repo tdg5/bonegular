@@ -1,6 +1,6 @@
 'use strict';
 
-module.exports = function(data, $http, $q) {
+module.exports = function($http, $q) {
 
     var util = require('./util')($http, $q);
 

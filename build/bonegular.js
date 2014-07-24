@@ -5,13 +5,10 @@ var bonegular = angular.module('bonegular', []);
 
 bonegular.factory('bonegular', function($http, $q) {
 
-    var data = {
-        'models': {},
-        'collections': {}
-    }, BaseModel, BaseCollection, createModel, createCollection;
+    var BaseModel, BaseCollection, createModel, createCollection;
 
-    BaseModel = require('./lib/model')(data, $http, $q);
-    BaseCollection = require('./lib/collection')(data, $http, $q);
+    BaseModel = require('./lib/model')($http, $q);
+    BaseCollection = require('./lib/collection')($http, $q);
 
     /**
      * Defines a new Model
@@ -84,8 +81,6 @@ bonegular.factory('bonegular', function($http, $q) {
             });
         });
 
-        data.models[options.name] = Model;
-
         return Model;
 
     };
@@ -136,7 +131,7 @@ bonegular.factory('bonegular', function($http, $q) {
                 'configurable': false,
                 'writable': false,
                 'enumerable': false,
-                'value': data.models[options.model]
+                'value': options.model
             });
 
             Object.defineProperty(this, '_url', {
@@ -187,8 +182,6 @@ bonegular.factory('bonegular', function($http, $q) {
             return collection.create.apply(collection, arguments);
         };
 
-        data.collections[options.name] = Collection;
-
         return Collection;
 
     };
@@ -201,14 +194,6 @@ bonegular.factory('bonegular', function($http, $q) {
 
         'createCollection': function(options) {
             return createCollection(options);
-        },
-
-        'getModel': function(name) {
-            return data.models[name];
-        },
-
-        'getCollection': function(name) {
-            return data.collections[name];
         }
 
     };
@@ -218,7 +203,7 @@ bonegular.factory('bonegular', function($http, $q) {
 },{"./lib/collection":2,"./lib/model":3}],2:[function(require,module,exports){
 'use strict';
 
-module.exports = function(data, $http, $q) {
+module.exports = function($http, $q) {
 
     var util = require('./util')($http, $q);
 
@@ -419,7 +404,7 @@ module.exports = function(data, $http, $q) {
 },{"./util":4}],3:[function(require,module,exports){
 'use strict';
 
-module.exports = function(data, $http, $q) {
+module.exports = function($http, $q) {
 
     var util = require('./util')($http, $q);
 
@@ -460,8 +445,7 @@ module.exports = function(data, $http, $q) {
         'createCollections': function(properties) {
             _.each(this._collections, function(collection, name) {
                 if (!this[name]) {
-                    var Collection = data.collections[collection];
-                    this[name] = new Collection(properties[name] || null, this);
+                    this[name] = new collection(properties[name] || null, this);
                 } else {
                     this[name].replaceAll(properties[name]);
                 }
