@@ -17,7 +17,6 @@ app.controller('DefaultController', function($scope, Countries) {
  */
 app.factory('Country', function(bonegular, States) {
     return bonegular.createModel({
-        'name': 'Country',
         'collections': {
             'states': States
         },
@@ -30,7 +29,6 @@ app.factory('Country', function(bonegular, States) {
  */
 app.factory('Countries', function(bonegular, Country) {
     return bonegular.createCollection({
-        'name': 'Countries',
         'model': Country,
         'rootUrl': '/countries',
         'methods': {}
@@ -39,7 +37,6 @@ app.factory('Countries', function(bonegular, Country) {
 
 app.factory('State', function(bonegular) {
     return bonegular.createModel({
-        'name': 'State',
         'methods': {
             'describe': function() {
                 alert(this.name + ' is awesome.');
@@ -50,7 +47,6 @@ app.factory('State', function(bonegular) {
 
 app.factory('States', function(bonegular, State) {
     return bonegular.createCollection({
-        'name': 'States',
         'model': State,
         'url': 'states',
         'methods': {}

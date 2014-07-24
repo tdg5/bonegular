@@ -30,13 +30,6 @@ bonegular.factory('bonegular', function($http, $q) {
                 'value': options.cache || null
             });
 
-            Object.defineProperty(this, '_name', {
-                'configurable': false,
-                'writable': false,
-                'enumerable': false,
-                'value': options.name
-            });
-
             Object.defineProperty(this, '_parent', {
                 'configurable': false,
                 'writable': true,
@@ -110,13 +103,6 @@ bonegular.factory('bonegular', function($http, $q) {
                 'writable': true,
                 'enumerable': true,
                 'value': []
-            });
-
-            Object.defineProperty(this, '_name', {
-                'configurable': false,
-                'writable': false,
-                'enumerable': false,
-                'value': options.name
             });
 
             Object.defineProperty(this, '_model', {
