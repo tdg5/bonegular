@@ -151,11 +151,13 @@ module.exports = function($http, $q) {
         },
 
         'collectionize': function(model) {
-            model.parent(this);
+            model.parent(this._parent);
+            model.collection(this);
         },
 
         'deCollectionize': function(model) {
             model.parent(null);
+            model.collection(null);
         },
 
         'toObject': function() {

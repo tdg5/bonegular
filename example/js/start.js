@@ -8,6 +8,19 @@ app.controller('DefaultController', function($scope, Countries) {
     $scope.countries = countries.models;
     countries.get().then(function() {
         console.log('Countries were fetched.', countries);
+        var usa = countries.findWhere({
+            'name': 'United States'
+        });
+        var tn = usa.states.findWhere({
+            'name': 'Tennessee'
+        });
+        console.log('tn', tn);
+        console.log('tn parent', tn.parent());
+        tn.save().then(function() {
+            console.log('tn saved');
+        }, function(err) {
+            console.log(err);
+        });
     });
 
 });

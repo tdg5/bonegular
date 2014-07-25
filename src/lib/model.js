@@ -33,6 +33,19 @@ module.exports = function($http, $q) {
             }
         },
 
+        'collection': function(collection) {
+            if (!_.isUndefined(collection)) {
+                Object.defineProperty(this, '_collection', {
+                    'configurable': false,
+                    'writable': true,
+                    'enumerable': false,
+                    'value': collection
+                });
+            } else {
+                return this._collection;
+            }
+        },
+
         'setData': function(properties) {
             this.setProperties(properties);
             this.createCollections(properties);
@@ -76,12 +89,12 @@ module.exports = function($http, $q) {
 
         'url': function() {
             var result = '';
-            if (this._parent) {
-                result = util.rtrim(this._parent.url(), '/');
+            if (this._collection) {
+                result = util.rtrim(this._collection.url(), '/');
                 result += ( '/' + ((this._id) ? this._id : '' ) );
             } else {
                 if (!this._rootUrl) {
-                    throw 'Model does not have a parent, and no value has been specified for `rootUrl`.';
+                    throw 'Model does not belong to a collection, and no value has been specified for `rootUrl`.';
                 }
                 result = '/' + util.trim(this._rootUrl, '/');
                 if (this._id) {

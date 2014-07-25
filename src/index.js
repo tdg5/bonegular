@@ -37,6 +37,13 @@ bonegular.factory('bonegular', function($http, $q) {
                 'value': null
             });
 
+            Object.defineProperty(this, '_collection', {
+                'configurable': false,
+                'writable': true,
+                'enumerable': false,
+                'value': null
+            });
+
             Object.defineProperty(this, '_rootUrl', {
                 'configurable': false,
                 'writable': true,

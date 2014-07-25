@@ -20,4 +20,8 @@ app.get('/countries', function(req, res) {
     res.send(require('./lib/country.json').data);
 });
 
+app.put('/countries/:country_id/states/:state_id', function(req, res) {
+    res.send(req.body);
+});
+
 module.exports = app;

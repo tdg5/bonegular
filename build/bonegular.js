@@ -31,14 +31,14 @@ bonegular.factory('bonegular', function($http, $q) {
                 'value': options.cache || null
             });
 
-            Object.defineProperty(this, '_name', {
+            Object.defineProperty(this, '_parent', {
                 'configurable': false,
-                'writable': false,
+                'writable': true,
                 'enumerable': false,
-                'value': options.name
+                'value': null
             });
 
-            Object.defineProperty(this, '_parent', {
+            Object.defineProperty(this, '_collection', {
                 'configurable': false,
                 'writable': true,
                 'enumerable': false,
@@ -111,13 +111,6 @@ bonegular.factory('bonegular', function($http, $q) {
                 'writable': true,
                 'enumerable': true,
                 'value': []
-            });
-
-            Object.defineProperty(this, '_name', {
-                'configurable': false,
-                'writable': false,
-                'enumerable': false,
-                'value': options.name
             });
 
             Object.defineProperty(this, '_model', {
@@ -354,11 +347,13 @@ module.exports = function($http, $q) {
         },
 
         'collectionize': function(model) {
-            model.parent(this);
+            model.parent(this._parent);
+            model.collection(this);
         },
 
         'deCollectionize': function(model) {
             model.parent(null);
+            model.collection(null);
         },
 
         'toObject': function() {
@@ -437,6 +432,19 @@ module.exports = function($http, $q) {
             }
         },
 
+        'collection': function(collection) {
+            if (!_.isUndefined(collection)) {
+                Object.defineProperty(this, '_collection', {
+                    'configurable': false,
+                    'writable': true,
+                    'enumerable': false,
+                    'value': collection
+                });
+            } else {
+                return this._collection;
+            }
+        },
+
         'setData': function(properties) {
             this.setProperties(properties);
             this.createCollections(properties);
@@ -480,12 +488,12 @@ module.exports = function($http, $q) {
 
         'url': function() {
             var result = '';
-            if (this._parent) {
-                result = util.rtrim(this._parent.url(), '/');
+            if (this._collection) {
+                result = util.rtrim(this._collection.url(), '/');
                 result += ( '/' + ((this._id) ? this._id : '' ) );
             } else {
                 if (!this._rootUrl) {
-                    throw 'Model does not have a parent, and no value has been specified for `rootUrl`.';
+                    throw 'Model does not belong to a collection, and no value has been specified for `rootUrl`.';
                 }
                 result = '/' + util.trim(this._rootUrl, '/');
                 if (this._id) {
