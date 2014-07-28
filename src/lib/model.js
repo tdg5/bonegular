@@ -197,8 +197,8 @@ module.exports = function($http, $q) {
             var d = $q.defer(),
                 self = this;
             util.del(this.url()).then(function() {
-                if (self.parent()) {
-                    self.parent().remove(self);
+                if (self.collection()) {
+                    self.collection().remove(self);
                     d.resolve();
                 } else {
                     d.resolve();
