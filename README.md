@@ -82,8 +82,9 @@ app.factory('Student', function(bonegular) {
 
 #### The "Schools" Collection
 ```
-app.factory('Schools', function(bonegular) {
+app.factory('Schools', function(School, bonegular) {
 	return bonegular.createCollection({
+	    'model': School,
 		'url': '/api/schools',
 		'methods': {}
 	});
@@ -92,8 +93,9 @@ app.factory('Schools', function(bonegular) {
 
 #### The "Students" Collection
 ```
-app.factory('Schools', function(bonegular) {
+app.factory('Students', function(Student, bonegular) {
 	return bonegular.createCollection({
+	    'model': Student,
 		'url': 'students',
 		'methods': {}
 	});
@@ -109,16 +111,16 @@ Now that we've defined our models and collections, we can use them:
 app.controller('DefaultController', function($scope, Schools) {
 
 	var schools = new Schools();
-	
+
 	/**
 	 * Executes a GET against /api/schools
 	 */
 	schools.get().then(function() {
-	
+
 		// Loop through our students collection.
 		schools.students.each(function(student) {
 		});
-		
+
 		// Executes a POST against /api/schools/:school_id/students
 		schools.students.create({
 			'first_name': 'John',
