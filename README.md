@@ -134,6 +134,21 @@ app.controller('DefaultController', function($scope, Schools) {
 });
 ```
 
+### Shared Models / Collections
+
+A common use case involves having a model or collection instance that you would like to share across multiple areas of your app. The following example illustrates how you can do that:
+
+```
+/**
+ * The `schools` service returns an *instance* of the `Schools` class. Any portion of your app
+ * that references this service will be referencing the same instance.
+ */
+app.factory('schools', function(Schools) {
+	var schools = new Schools();
+	return schools.get();
+});
+```
+
 ## Installation <a name="installation"></a>
 
 ```
