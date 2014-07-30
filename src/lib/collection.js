@@ -102,6 +102,10 @@ module.exports = function($http, $q) {
             });
         },
 
+        'filter': function(fn) {
+            return _.filter(this.models, fn);
+        },
+
         'pluck': function(property) {
             return _.pluck(this.models, property);
         },
