@@ -88,18 +88,16 @@ module.exports = function($http, $q) {
         },
 
         'url': function() {
-            var result = '';
+            var result = '',
+                primaryKey = this[this._primaryKey] || '';
             if (this._collection) {
                 result = util.rtrim(this._collection.url(), '/');
-                result += ( '/' + ((this._id) ? this._id : '' ) );
+                result += ( '/' + primaryKey );
             } else {
                 if (!this._rootUrl) {
                     throw 'Model does not belong to a collection, and no value has been specified for `rootUrl`.';
                 }
-                result = '/' + util.trim(this._rootUrl, '/');
-                if (this._id) {
-                    result = result + '/' + this._id;
-                }
+                result = '/' + util.trim(this._rootUrl, '/') + '/' + primaryKey;
             }
             result = util.rtrim(result, '/');
             return result;
@@ -155,7 +153,7 @@ module.exports = function($http, $q) {
         'save': function() {
             var d = $q.defer(),
                 self = this;
-            if (this._id) {
+            if (this[this._primaryKey]) {
                 util.put(this.url(), this.toObject()).then(function(data) {
                     self.setData(data);
                     d.resolve(self);

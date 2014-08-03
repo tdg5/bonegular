@@ -66,13 +66,13 @@ module.exports = function($http, $q) {
 
         'append': function(model) {
             var existing,
-                self = this;
+                query = {};
             if (!_.isFunction(model)) {
                 model = new this._Model(model);
             }
-            existing = this.findWhere({
-                '_id': model._id
-            });
+
+            query[this._primaryKey] = model[this._primaryKey];
+            existing = this.findWhere(query);
             if (existing) {
                 this.replace(existing, model);
             } else {
@@ -97,9 +97,9 @@ module.exports = function($http, $q) {
         },
 
         'id': function(id) {
-            return _.findWhere(this.models, {
-                '_id': id
-            });
+            var query = {};
+            query[this._primaryKey] = id;
+            return _.findWhere(this.models, query);
         },
 
         'filter': function(fn) {

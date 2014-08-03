@@ -58,6 +58,13 @@ bonegular.factory('bonegular', function($http, $q) {
                 'value': options.collections || {}
             });
 
+            Object.defineProperty(this, '_primaryKey', {
+                'configurable': false,
+                'writable': false,
+                'enumerable': false,
+                'value': options.primaryKey || '_id'
+            });
+
             this._init.apply(this, arguments);
 
         };
@@ -145,6 +152,13 @@ bonegular.factory('bonegular', function($http, $q) {
                 'writable': true,
                 'enumerable': false,
                 'value': null
+            });
+
+            Object.defineProperty(this, '_primaryKey', {
+                'configurable': false,
+                'writable': false,
+                'enumerable': false,
+                'value': options.primaryKey || options.model && options.model._primaryKey || '_id'
             });
 
             this._init.apply(this, arguments);
